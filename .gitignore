@@ -1,1 +1,5 @@
+# This is probably the course repo, don't need to upload that
 Computational*
+
+# The pdf's are only needed for turning in the assignments, no need to upload those
+*.pdf
