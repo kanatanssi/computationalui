@@ -1,7 +1,13 @@
 # This is probably the course repo, don't need to upload that
-Computational*
+#Computational*
+course_repo
 
 # The pdf's are only needed for turning in the assignments, no need to upload those
 *.pdf
 
 .DS_Store
+
+#Assignment 3 stuff
+Assignment 3.pdf
+Noise.csv
+Noise.1.csv
