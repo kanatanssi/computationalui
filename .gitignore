@@ -11,3 +11,11 @@ course_repo
 Assignment 3.pdf
 Noise.csv
 Noise.1.csv
+
+#Texmaker generates these
+*.aux
+*.log
+*.synctex.*
+
+# I mark old stuff with this
+*_bu
