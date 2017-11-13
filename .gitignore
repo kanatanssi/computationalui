@@ -3,3 +3,5 @@ Computational*
 
 # The pdf's are only needed for turning in the assignments, no need to upload those
 *.pdf
+
+.DS_Store
