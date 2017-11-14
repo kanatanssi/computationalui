@@ -13,8 +13,11 @@ Noise.csv
 Noise.1.csv
 
 #Assignment 4 stuff
-ass4
-!ass4/**/Exercises.py
+#ass4
+#!ass4/**/Exercises.py
+
+LectureToSend
+test
 
 #ass4/LectureToSend/.ipynb_checkpoints
 #ass4/LectureToSend/imgs
