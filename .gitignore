@@ -12,6 +12,14 @@ Assignment 3.pdf
 Noise.csv
 Noise.1.csv
 
+#Assignment 4 stuff
+LectureToSend/.ipynb_checkpoints
+LectureToSend/imgs
+LectureToSend/gurobi.log
+LectureToSend/Niraj_Lecture.ipynb
+LectureToSend/render_anna.*
+LectureToSend/utils_anna.*
+
 #Texmaker generates these
 *.aux
 *.log
