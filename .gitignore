@@ -39,6 +39,11 @@ test
 render_anna.*
 utils_anna.*
 
+# Ass6 stuff
+ass6
+!ass6/**/scrolling_final
+ass6/**/scrolling_final/data
+
 # Ass 8_1 stuff, this is just images anyway
 8_1
 
