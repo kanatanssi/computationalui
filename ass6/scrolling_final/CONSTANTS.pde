@@ -1,0 +1,10 @@
+int pageN=20;
+Page[] pages;
+int pageScroll=0;
+float pwholeScrollAmount=0;
+float animatedScroll=0;
+float wholeScrollAmount=0;
+float prevY;
+color bg;
+float w;
+float h;

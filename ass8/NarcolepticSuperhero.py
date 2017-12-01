@@ -36,7 +36,7 @@ class NarcolepticSuperhero(object):
         # Superheroes are always on call. ALWAYS. But they're not always
         # dressed in work-appropriate clothing.
         self.machine.add_transition('distress_call', '*', 'saving the world',
-                                    before='change_into_super_secret_costume')
+                                    after='change_into_super_secret_costume')
 
         # When they get off work, they're all sweaty and disgusting. But before
         # they do anything else, they have to meticulously log their latest
@@ -64,6 +64,44 @@ class NarcolepticSuperhero(object):
         """ Print a thing """
         print "Beauty, eh?"
 
+####################### SECOND FSM HERE! ############################
+class WaterTap(object):
+
+    # Define some states
+    states = ['cold water', 'hot water', 'no water', 'lukewarm water']
+
+    def __init__(self, name):
+
+        # Superheroes get a name, why not water taps too?
+        self.name = name
+
+        # Initialize the state machine
+        self.machine = Machine(model=self, states=WaterTap.states, initial='no water')
+
+        # Run some hot water
+        self.machine.add_transition('hot', 'no water', 'hot water', after='water_status')
+        # Run some cold water
+        self.machine.add_transition('cold', 'no water', 'cold water', after='water_status')
+        # Run some mixed temperature water
+        self.machine.add_transition('both', 'no water', 'lukewarm water', after='water_status')
+        # Don't run any water
+        self.machine.add_transition('stop', 'hot water', 'no water', after='water_status')
+        self.machine.add_transition('stop', 'cold water', 'no water', after='water_status')
+        self.machine.add_transition('stop', 'lukewarm water', 'no water', after='water_status')
+        # Change water temperature
+        self.machine.add_transition('hot', 'cold water', 'hot water', after='water_status')
+        self.machine.add_transition('hot', 'lukewarm water', 'hot water', after='water_status')
+        self.machine.add_transition('cold', 'hot water', 'cold water', after='water_status')
+        self.machine.add_transition('cold', 'lukewarm water', 'cold water', after='water_status')
+        self.machine.add_transition('both', 'cold water', 'lukewarm water', after='water_status')
+        self.machine.add_transition('both', 'hot water', 'lukewarm water', after='water_status')
+        
+    def water_status(self):
+        """ Print a thing """
+        print "Now running: ", self.state
+
+####################### TESTS HERE! ############################
+
 def fsm_test(machine):
     """
     This function just calls the two functions below it
@@ -83,9 +121,11 @@ def fsm_test(machine):
     print "###########################################"
     property_exists, latest_state = fsm_testFeedback(machine)
     if property_exists:
-        print property_exists, ", property holds. No inconsistent triggers"
+        print property_exists, ", property holds. Every transition gives feedback"
     else:
         print property_exists, ", property does not hold. Latest state tested: ", latest_state
+
+####################### DEADLOCK TEST HERE! ############################
 
 def fsm_testDeadlock(machine):
     """
@@ -117,6 +157,8 @@ def fsm_testDeadlock(machine):
             return property_exists, latest_state
     return property_exists, latest_state
 
+####################### FEEDBACK TEST HERE! ############################
+
 # Tests machine for continuous feedback
 def fsm_testFeedback(machine):
     """
@@ -127,7 +169,7 @@ def fsm_testFeedback(machine):
     (unless the user has some other, unexpected way of sensing feedback
     like a brain-computer interface)
     """
-    property_exists = False
+    property_exists = True
     latest_state = machine.state
 
     # Go to each state, test each trigger and capture output.
@@ -136,13 +178,16 @@ def fsm_testFeedback(machine):
     for state in machine.states:
         latest_state = state
         print "Current state: ", state
+        
         for trigger in machine.machine.get_triggers(state):
         # filter out triggers with names "to_..." (since automatically generated ones are to_<state>)
         # because we don't need to test for the automatically generated triggers imo
             if trigger[:3] != "to_":
-                print "Trigger: ", trigger
+                #print "Trigger: ", trigger
                 exe_str = 'machine.'+trigger+'()'
-                print exe_str
+                #print exe_str
+
+                # This is where we capture the print from stdout
                 with capture_output() as c:
                     exec exe_str
                 c()
@@ -156,6 +201,7 @@ def fsm_testFeedback(machine):
             return property_exists, latest_state
     return property_exists, latest_state
 
+####################### UNIMPLEMENTED CONSISTENCY TEST HERE! ############################
 
 # Tests machine for consistency
 #def fsm_testConsistency(machine):
@@ -188,26 +234,27 @@ def fsm_testFeedback(machine):
 #    return property_exists, latest_state
 
 
-############################################### Main is here!
+####################### MAIN HERE! ############################
 
 # Create superheromachine
 superhero = NarcolepticSuperhero("FiniteStateMan")
-# Create smallmachine
-# smallmachine = smallFSM
+# Create WaterTap
+watertap = WaterTap("WaterTap")
+
+print watertap.state
+print watertap.states
+watertap.cold()
+print watertap.state
+
+exe_str = 'watertap.'+'hot'+'()'
+print exe_str
+with capture_output() as c:
+    exec exe_str
+c()
+if c.stdout == "":
+    print "no feedback"
+else:
+    print c.stdout
 
 fsm_test(superhero)
-
-#state = "distress_call"
-#state = "wake_up"
-#exe_str = 'superhero.'+state+'()'
-#print exe_str
-
-#with capture_output() as c:
-#    exec exe_str
-     #superhero.distress_call()
-#c()
-#if c.stdout == "":
-#    print "empty feedback"
-                #    #print c.stdout
-#else:
-#    print "Feedback: ", c.stdout
+fsm_test(watertap)
