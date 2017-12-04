@@ -12,6 +12,7 @@ course_repo
 # This is likely something that came with the assignment
 *.jpg
 *.csv
+*.zip
 
 # Don't need this
 *.pyc
@@ -46,6 +47,9 @@ ass6/**/data
 
 # Ass 8_1 stuff, this is just images anyway
 8_1
+
+# Ass 9 stuff
+visual-search
 
 #Texmaker generates these
 *.aux
