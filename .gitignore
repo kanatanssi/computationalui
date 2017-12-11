@@ -57,4 +57,4 @@ visual-search
 *.synctex.*
 
 # I mark old stuff with this
-*_bu
+*_bu*
