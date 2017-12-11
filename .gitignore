@@ -51,6 +51,12 @@ ass6/**/data
 # Ass 9 stuff
 visual-search
 
+# Extra ass stuff
+Extra-assignment-web-pages
+
+# Lecture notebook
+MAB_python
+
 #Texmaker generates these
 *.aux
 *.log
