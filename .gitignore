@@ -13,6 +13,7 @@ course_repo
 *.jpg
 *.csv
 *.zip
+*.ps
 
 # Don't need this
 *.pyc
@@ -53,6 +54,9 @@ visual-search
 
 # Extra ass stuff
 Extra-assignment-web-pages
+
+# Ass 11 stuff
+Second
 
 # Lecture notebook
 MAB_python
